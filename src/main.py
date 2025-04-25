@@ -1,3 +1,13 @@
+# py-bls-api
+# Author: Christopher Morris
+# License: Non-Commercial, No-Derivatives License
+#
+# You may use this code for personal, educational, or non-commercial research purposes
+# with proper attribution. Commercial use, redistribution, or modification is not allowed
+# without explicit permission from the author.
+#
+# For full license terms, see the LICENSE file.
+
 import pandas as pd
 import requests
 from typing import Any, List, Dict, Tuple, Optional, Union
