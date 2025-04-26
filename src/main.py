@@ -33,6 +33,50 @@ def get_survey_metadata(survey_abbreviation: str) -> Dict[str, Any]:
     return response.json()
 
 
+def get_data_preview(survey_abbreviation: str) -> pd.DataFrame:
+    """
+    Returns a dataframe containing a data preview for a given survey (e.g., 'IP', 'CU').
+    """
+    data_preview = get_survey_metadata(survey_abbreviation)['data_preview']
+
+    return pd.DataFrame(data_preview)
+
+
+def get_seriesid_metadata(survey_abbreviation: str) -> pd.DataFrame:
+    """
+    Returns a dataframe containing Series ID metadata for a given survey (e.g., 'IP', 'CU').
+    """
+    seriesid_metadata = get_survey_metadata(survey_abbreviation)['series_id']
+    
+    return pd.DataFrame(seriesid_metadata)
+
+
+def get_popular_seriesids(survey_abbreviation: str, registrationkey: str) -> List[str]:
+    """
+    Returns a list of popular BLS Series IDs for a given survey (e.g., 'CU', 'CE').
+
+    Parameters:
+    - survey_abbreviation: Survey code to filter popular series (e.g., 'CU').
+    - registrationkey: The BLS API registration key. Register at https://data.bls.gov/registrationEngine/.
+
+    Returns:
+    - A list of popular Series IDs. Returns an empty list if none are found or if the request fails.
+    """    
+    # request URL
+    url = f"https://api.bls.gov/publicAPI/v2/timeseries/popular?survey={survey_abbreviation.upper()}"
+    params = {"registrationkey": registrationkey}
+
+    # fetch popular Series IDs
+    response = requests.post(url, params=params)
+
+    # process API response and extract Series IDs
+    if response.status_code == 200:
+        popular_series = response.json().get("Results", {}).get("series", [])
+        return [item.get("seriesID") for item in popular_series if item]
+    else:
+        return []
+
+
 def validate_parameters(seriesids: List[str], startyear: int, endyear: int, registrationkey: str, metadata: Dict[str, any]) -> None:
     """
     Validates parameters for get_bls_data.
