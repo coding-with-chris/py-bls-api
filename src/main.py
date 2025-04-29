@@ -46,7 +46,7 @@ def get_seriesid_metadata(survey_abbreviation: str) -> pd.DataFrame:
     """
     Returns a dataframe containing Series ID metadata for a given survey (e.g., 'IP', 'CU').
     """
-    seriesid_metadata = get_survey_metadata(survey_abbreviation)['series_id']
+    seriesid_metadata = get_survey_metadata(survey_abbreviation)['series']
     
     return pd.DataFrame(seriesid_metadata)
 
@@ -111,7 +111,7 @@ def validate_parameters(seriesids: List[str], startyear: int, endyear: int, regi
         raise ValueError(f"Survey abbreviation '{survey_abbreviation}' is not currently supported by the py-bls-api wrapper.")
 
     # validate that Series IDs are found in the metadata.        
-    valid_series_ids = {valid_series["id"] for valid_series in metadata["series_id"]}
+    valid_series_ids = {valid_series["id"] for valid_series in metadata["series"]}
     invalid_seriesids = [series for series in seriesids if series not in valid_series_ids]
     if invalid_seriesids:
         raise ValueError(f"Invalid Series ID(s) found: {', '.join(invalid_seriesids)}. Check the survey metadata for more information.")
@@ -251,7 +251,7 @@ def get_bls_data(seriesids: List[str], startyear: int, endyear: int, registratio
         return pd.DataFrame(), pd.DataFrame({"log": log_messages})
 
     # create Series ID lookup of valid year ranges from survey metadata        
-    series_lookup = {series["id"]: series["year_range"] for series in metadata["series_id"]}
+    series_lookup = {series["id"]: series["year_range"] for series in metadata["series"]}
 
     # Group Series IDs by effective year range based on overlap of metadata and user input. 
     grouped_series = group_series_for_user_range(seriesids, series_lookup, startyear, endyear, log_messages)
