@@ -67,7 +67,7 @@ def get_popular_seriesids(survey_abbreviation: str, registrationkey: str) -> Lis
     params = {"registrationkey": registrationkey}
 
     # fetch popular Series IDs
-    response = requests.post(url, params=params)
+    response = requests.get(url, params=params)
 
     # process API response and extract Series IDs
     if response.status_code == 200:
@@ -77,7 +77,7 @@ def get_popular_seriesids(survey_abbreviation: str, registrationkey: str) -> Lis
         return []
 
 
-def validate_parameters(seriesids: List[str], startyear: int, endyear: int, registrationkey: str, metadata: Dict[str, any]) -> None:
+def validate_parameters(seriesids: List[str], startyear: int, endyear: int, registrationkey: str, metadata: Dict[str, Any]) -> None:
     """
     Validates parameters for get_bls_data.
 
@@ -168,7 +168,7 @@ def split_year_chunks(startyear: int, endyear: int, chunk_size: int = 20) -> Lis
     """
     return [(i, min(i + chunk_size - 1, endyear)) for i in range(startyear, endyear + 1, chunk_size)]
 
-def fetch_bls_data(payload: Dict[str, any], request_url: str, log_messages: List[str]) -> Optional[Dict[str, any]]:
+def fetch_bls_data(payload: Dict[str, Any], request_url: str, log_messages: List[str]) -> Optional[Dict[str, Any]]:
     """
     Requests data from the BLS API and returns the JSON response if successful.
 
@@ -187,7 +187,7 @@ def fetch_bls_data(payload: Dict[str, any], request_url: str, log_messages: List
         log_messages.append(f"Failed to fetch data. HTTP {response.status_code} — Payload: {payload}")
         return None
 
-def process_api_response(data: Dict[str, any], year_start: int, year_end: int, log_messages: List[str]) -> List[Dict[str, any]]:
+def process_api_response(data: Dict[str, Any], year_start: int, year_end: int, log_messages: List[str]) -> List[Dict[str, Any]]:
     """
     Processes API response and extracts records, logging messages and missing data.
 
