@@ -16,7 +16,7 @@ def get_surveys() -> Dict[str, str]:
     """
     Returns a dictionary of BLS surveys supported by py-bls-api.
     """
-    url = r"https://raw.githubusercontent.com/coding-with-chris/py-bls-api/main/Metadata/bls-datasets.json"
+    url = r"https://coding-with-chris.github.io/py-bls-api/metadata/bls-datasets.json"
     response = requests.get(url)
 
     return response.json()
@@ -26,8 +26,7 @@ def get_survey_metadata(survey_abbreviation: str) -> Dict[str, Any]:
     """
     Returns a dictionary containing metadata for a given survey (e.g., 'IP', 'CU').
     """
-    url = fr"https://raw.githubusercontent.com/coding-with-chris/py-bls-api/main/Metadata/{survey_abbreviation.upper()}.json"
-
+    url = fr"https://coding-with-chris.github.io/py-bls-api/metadata/{survey_abbreviation.upper()}.json"
     response = requests.get(url)
 
     return response.json()
