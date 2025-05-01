@@ -22,9 +22,9 @@ setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        "requests",
-        "pandas",
-    ],
+        "pandas>=1.3.0",
+        "requests>=2.25.0",
+    ],    
     python_requires=">=3.6",
     license="Proprietary"
 )
