@@ -15,6 +15,7 @@ setup(
     url="https://github.com/coding-with-chris/py-bls-api",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
+    include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: Other/Proprietary License",
