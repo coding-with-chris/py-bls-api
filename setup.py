@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="py-bls-api",
-    version="0.1.0",
+    version="0.1.1",
     author="Chris Morris",
     description="A Python wrapper for the U.S. Bureau of Labor Statistics (BLS) API",
     long_description=long_description,
