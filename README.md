@@ -83,8 +83,8 @@ print(popular_ids)
 
 ```python
 series_ids = ["CUUR0000SA0"]  # e.g., CPI-All Urban Consumers
-start_year = 2015
-end_year = 2020
+start_year = 2020
+end_year = 2024
 api_key = "YOUR_API_KEY_HERE"
 
 # Returns a tuple: (data_df, log_df)
@@ -100,8 +100,6 @@ By default, metadata files are fetched from GitHub Pages:
 ```
 https://coding-with-chris.github.io/py-bls-api/metadata/
 ```
-
-You can override base URLs by modifying the constants in `metadata_utils.py` (if implemented).
 
 ## Requirements
 
